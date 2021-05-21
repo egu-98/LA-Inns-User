@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'UserHomeController@admin_home')->name( 'admin_home' );
+
+Route::resource('inns', 'InnController');
+Route::get('innSearch', 'InnController@search')->name('inn_search');
+
+Route::resource( 'users', 'UserController' );
+Route::get( 'userSearch', 'UserController@search' )->name( 'user_search' );
+
+Route::resource( 'plans', 'PlanController' );

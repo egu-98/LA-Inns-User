@@ -82,4 +82,9 @@ class InnController extends Controller
     {
         //
     }
+
+    public function search( Request $request ){
+        $inns = Inn::where( 'address','LIKE', "%$request->address%" )->get();
+        return view( 'home', ['inns' => $inns] );
+    }
 }

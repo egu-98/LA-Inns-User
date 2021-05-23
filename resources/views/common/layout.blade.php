@@ -15,7 +15,29 @@
             @yield( 'header' )
         </div>
         <div>
-            <a class="button" href="">ログイン</a>
+            @if( Auth::check() )
+                <ul class="navigation">
+                    <li>
+                        <a href="">アカウント</a>
+                    </li>
+                    <li>
+                        <a href="" onclick="logout()">ログアウト</a>
+                        <form action="{{ route( 'logout' ) }}" method="POST" id="logout-form">
+                            @csrf
+                        </form>
+                        <script type="text/javascript">
+                            function logout(){
+                                event.preventDefault();
+                                if( window.confirm( 'ログアウトしますか？' ) ){
+                                    document.getElementById( 'logout-form' ).submit();
+                                }
+                            }
+                        </script>
+                    </li>
+                </ul>
+            @else
+                <a class="button" href="{{ route( 'login' ) }}">ログイン</a>
+            @endif
         </div>
     </div>
     

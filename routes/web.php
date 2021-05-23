@@ -10,13 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get( '/', 'Auth\LoginController@showLoginForm' );
 Auth::routes([
     'reset' => false,
     'confirm' => false,
 ]);
 
-Route::get('/', 'UserHomeController@admin_home')->name( 'admin_home' );
+
+Route::get( '/', 'UserHomeController@user_home')->name( 'user_home' );
 
 Route::resource('inns', 'InnController');
 Route::get('innSearch', 'InnController@search')->name( 'inn_search' );

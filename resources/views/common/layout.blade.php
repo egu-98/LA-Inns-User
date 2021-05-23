@@ -9,7 +9,7 @@
 <body>
     <div>
         <div>
-            <img src="img/LA_Inns.jpg" alt="LA_Inns" style="width: 11ex; height: 14ex">
+            <img src="img/LA_Inns.jpg" alt="LA_Inns" style="width: 11ex; height: 14ex" onclick="location.href='/'">
         </div>
         <div>
             @yield( 'header' )
@@ -18,7 +18,7 @@
             @if( Auth::check() )
                 <ul class="navigation">
                     <li>
-                        <a href="">アカウント</a>
+                        <a href="{{ route( 'users.index' ) }}">アカウント</a>
                     </li>
                     <li>
                         <a href="" onclick="logout()">ログアウト</a>

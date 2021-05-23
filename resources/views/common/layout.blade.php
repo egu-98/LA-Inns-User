@@ -9,7 +9,7 @@
 <body>
     <div>
         <div>
-            <h1>宿.com</h1>
+            <img src="img/LA_Inns.jpg" alt="LA_Inns" style="width: 11ex; height: 14ex">
         </div>
         <div>
             @yield( 'header' )

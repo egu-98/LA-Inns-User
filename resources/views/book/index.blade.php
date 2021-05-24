@@ -16,6 +16,8 @@
 <div>
     <form action="{{ route( 'books.create' ) }}" method="GET" name="book_form">
         @csrf
+        <input type="hidden" name="user_id" value="{{ $user_id }}">
+        <input type="hidden" name="inn_id" value="{{ $inn_id }}">
         <p>
             <label for="name">チェックイン：</label>
             <input type="date" name="checkin_date" id="checkin_date" onchange="total_price()">
@@ -51,33 +53,38 @@
             var plan_price;
             var rooms;
 
-            // checkin_date = new Date( document.getElementById( 'checkin_date' ) );
-            checkin_date = document.getElementById( 'checkin_date' );
-            checkin_date = checkin_date.value.split( '-' );
+            // get checkin date -> date object
+            var checkin_date = document.getElementById( 'checkin_date' );
+            checkin_date = checkin_date.value.split( '-' ); 
+            checkin_date = new Date( checkin_date[ 0 ], checkin_date[ 1 ], checkin_date[ 2 ] );
+            
             console.log( checkin_date[ 0 ] );
             console.log( checkin_date[ 1 ] );
             console.log( checkin_date[ 2 ] );
-            
-            var checkin_date = new Date( checkin_date[ 0 ], checkin_date[ 1 ], checkin_date[ 2 ] );
             console.log( checkin_date );
 
-            // checkout_date = new Date( document.getElementById( 'checkout_date' ) );
-            checkout_date = document.getElementById( 'checkout_date' );
+            // get checkout date -> date object
+            var checkout_date = document.getElementById( 'checkout_date' );
             checkout_date = checkout_date.value.split( '-' );
-            var checkout_date = new Date( checkout_date[ 0 ], checkout_date[ 1 ], checkout_date[ 2 ] );
-            console.log( checkout_date );
+            checkout_date = new Date( checkout_date[ 0 ], checkout_date[ 1 ], checkout_date[ 2 ] );
             
+            console.log( checkout_date );
+
+            // calculate days
             days = ( checkout_date - checkin_date) / 86400000;
             console.log( days );
 
+            // get price of the plan
             var plan = document.book_form.plan;
             const num = plan.selectedIndex;
             plan_price = plan.options[num].value;
             plan_price = plan.options[num].value.split( '_' )[ 1 ];
 
+            // get the numbar of rooms
             rooms = document.getElementById( 'rooms' );
             rooms = rooms.value;
 
+            // calculate total price to stay
             total_price = Number( plan_price ) * Number( rooms ) * Number( days );
             if( !isNaN( total_price ) ) document.getElementById( 'total_price' ).innerHTML = total_price + "円";
         }

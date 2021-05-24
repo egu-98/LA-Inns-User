@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Plan;
+use App\Inn;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -24,9 +25,25 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create( Request $request )
+    {   
+        $book = new Book;
+        $book->user_id = $request->user_id;
+        $book->inn_id = $request->inn_id;
+        $plan_id = explode( '_', $request->plan );
+        $book->plan_id = $plan_id[ 0 ];
+        $book->rooms = $request->rooms;
+        $book->checkin_date = $request->checkin_date;
+        $book->checkout_date = $request->checkout_date;
+
+        $checkin_date = explode( '-', $book->checkin_date );
+        $checkin_date = $checkin_date[ 0 ] . "年 " . (int)$checkin_date[ 1 ] . "月 " . (int)$checkin_date[ 2 ] . "日";
+
+        $checkout_date = explode( '-', $book->checkout_date );
+        $checkout_date = $checkout_date[ 0 ] . "年 " . (int)$checkout_date[ 1 ] . "月 " . (int)$checkout_date[ 2 ] . "日";
+        
+        $plan = Plan::find( $plan_id[ 0 ] );
+        return view( 'book.create', [ 'book' => $book, 'plan' => $plan, 'checkin_date' => $checkin_date, 'checkout_date' => $checkout_date ]);
     }
 
     /**
@@ -37,7 +54,20 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = new Book;
+        $book->user_id = $request->user_id;
+        $book->inn_id = $request->inn_id;
+        $plan_id = explode( '_', $request->plan );
+        $book->plan_id = $plan_id[ 0 ];
+        $book->rooms = $request->rooms;
+        $book->checkin_date = $request->checkin_date;
+        $book->checkout_date = $request->checkout_date;
+        $book->save();
+
+        $inn = Inn::find( $book->inn_id );
+        $plans = $inn->plans()->get();
+        $reviews = $inn->reviews()->get();
+        return view( 'inn.show', [ 'inn' => $inn, 'plans' => $plans, 'reviews' => $reviews ] );
     }
 
     /**

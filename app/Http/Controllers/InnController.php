@@ -12,9 +12,9 @@ class InnController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( )
     {
-        //
+        // 
     }
 
     /**
@@ -44,9 +44,11 @@ class InnController extends Controller
      * @param  \App\Inn  $inn
      * @return \Illuminate\Http\Response
      */
-    public function show(Inn $inn)
-    {
-        //
+    public function show( Inn $inn )
+    {   
+        $plans = $inn->plans()->get();
+        $reviews = $inn->reviews()->get();
+        return view( 'inn.show', [ 'inn' => $inn, 'plans' => $plans, 'reviews' => $reviews ] );
     }
 
     /**

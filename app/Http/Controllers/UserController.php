@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,7 +15,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        // userのidを外部キーにbooksテーブルから予約情報を取得する
+        $books = [];
+        return view( 'user.index', [ 'user' => $user, 'books' => $books ] );
     }
 
     /**
@@ -34,7 +39,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 
     }
 
     /**
@@ -54,9 +59,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( User $user )
     {
-        //
+        $user = User::find( $user->id );
+        return view( 'user.edit', [ 'user' => $user ] );
     }
 
     /**
@@ -68,7 +74,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find( $id );
+        if( isset($request->name) ) $user->name = $request->name;
+        if( isset($request->email) ) $user->email = $request->email;
+        if( isset($request->password) ) $user->password = $request->password;
+        $user->save();
+        // userのidを外部キーにbooksテーブルから予約情報を取得する
+        $books = [];
+        return redirect( route( 'users.index', [ 'user' => $user, 'books' => $books ] ) );
     }
 
     /**

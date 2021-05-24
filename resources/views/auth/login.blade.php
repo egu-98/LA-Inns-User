@@ -8,7 +8,9 @@
 </head>
 <body>
     <div>
-        <a href="/">{{ config( 'app.name' ) }}</a>
+        <div>
+            <img src="img/LA_Inns.jpg" alt="LA_Inns" style="width: 11ex; height: 14ex" onclick="location.href='/'">
+        </div>
         <h1>ログイン</h1>
     </div>
     

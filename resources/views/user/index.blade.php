@@ -12,7 +12,7 @@
 
 @section( 'contents' )
 <div>
-    <img src="img/icon.jpg" alt="user_icon" style="width: 20ex; heghit: 20ex">
+    <img src="{{ asset( 'img/icon.jpg' ) }}" alt="user_icon" style="width: 20ex; heghit: 20ex">
     <h3>名前： {{ $user->name }}</h3>
     <p>メールアドレス： {{ $user->email }}</p>
     <a href="{{ route( 'users.edit', $user->id ) }}">アカウント情報を変更する</a>

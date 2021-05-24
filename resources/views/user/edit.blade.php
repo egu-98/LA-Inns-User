@@ -14,7 +14,7 @@
 <h1>アカウント情報変更</h1>
 
 <div>
-    <img src="img/icon.jpg" alt="user_icon" style="width: 20ex; heghit: 20ex">
+    <img src="{{ asset( 'img/icon.jpg' ) }}" alt="user_icon" style="width: 20ex; heghit: 20ex">
 </div>
 <div>
     <form action="{{ route( 'users.update', $user->id ) }}" method="POST" >

@@ -9,7 +9,7 @@
 <body>
     <div>
         <div>
-            <img src="img/LA_Inns.jpg" alt="LA_Inns" style="width: 11ex; height: 14ex" onclick="location.href='/'">
+            <img src="{{ asset( 'img/LA_Inns.jpg' ) }}" alt="LA_Inns" style="width: 11ex; height: 14ex" onclick="location.href='/'">
         </div>
         <div>
             @yield( 'header' )

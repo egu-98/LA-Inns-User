@@ -28,3 +28,5 @@ Route::get( 'userSearch', 'UserController@search' )->name( 'user_search' );
 Route::resource( 'plans', 'PlanController' );
 
 Route::resource( 'reviews', 'ReviewController' );
+
+Route::resource('books', 'BookController');

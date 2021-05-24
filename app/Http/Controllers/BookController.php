@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Plan;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -12,9 +13,10 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index( Request $request )
+    {     
+        $plans = Plan::where( 'inn_id', $request->inn_id )->get();
+        return view( 'book.index', [ 'user_id' => $request->user_id, 'inn_id' => $request->inn_id, 'plans' => $plans ] );
     }
 
     /**

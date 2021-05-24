@@ -24,7 +24,16 @@
         @endforeach
         </ul>
     @endif
-    <a href="">予約する</a>
+
+    @if( Auth::check() )
+        <form action="{{ route( 'books.index' ) }}" method="GET">
+            @csrf    
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="inn_id" value="{{ $inn->id }}">
+            <button type="submmit">予約する</button>        
+        </form>
+    @else <p>予約をするにはログインしてください</p>
+    @endif
 </div>
 
 <div>
@@ -32,7 +41,7 @@
     @if( count( $reviews ) > 0 )
         @foreach ( $reviews as $review )
             <div>
-                <img src="{{ asset( 'img/icon.jpg' ) }}" alt="{{ $review->user->name }}" style="width: 5ex; heghit: 5ex;">
+                <img src="{{ asset( 'img/icon.jpg' ) }}" alt="{{ $review->user->name }}" style="width: 4ex; heghit: 5ex;">
                 {{ $review->user->name }}
                 @for ($i = 0; $i < $review->stars; $i++)
                     <img src="{{ asset( 'img/star_selected.png' ) }}" alt="star" style="width: 20px">

@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::get( '/', 'Auth\LoginController@showLoginForm' );
 Auth::routes([
     'reset' => false,
@@ -29,4 +31,5 @@ Route::resource( 'plans', 'PlanController' );
 
 Route::resource( 'reviews', 'ReviewController' );
 
-Route::resource('books', 'BookController');
+Route::resource( 'books', 'BookController' );
+Route::get( 'preCreateBook', 'BookController@preCreateBook' )->name( 'pre_create_book' );

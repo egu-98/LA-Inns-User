@@ -6,6 +6,7 @@ use App\Book;
 use App\Plan;
 use App\Inn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -25,6 +26,12 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function preCreateBook( Request $request )
+    {     
+        $plans = Plan::where( 'inn_id', $request->inn_id )->get();
+        return view( 'book.pre_create', [ 'user_id' => $request->user_id, 'inn_id' => $request->inn_id, 'plans' => $plans ] );
+    }
+
     public function create( Request $request )
     {   
         $book = new Book;
@@ -76,9 +83,19 @@ class BookController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($id)
     {
-        //
+        $book = Book::find( $id );
+
+        $checkin_date = explode( '-', $book->checkin_date );
+        $checkin_date = $checkin_date[ 0 ] . "年 " . (int)$checkin_date[ 1 ] . "月 " . (int)$checkin_date[ 2 ] . "日";
+
+        $checkout_date = explode( '-', $book->checkout_date );
+        $checkout_date = $checkout_date[ 0 ] . "年 " . (int)$checkout_date[ 1 ] . "月 " . (int)$checkout_date[ 2 ] . "日";
+        
+        $plan = Plan::find( $book->plan_id );
+        $inn = Inn::find( $book->inn_id );
+        return view( 'book.show', [ 'book' => $book, 'plan' => $plan, 'checkin_date' => $checkin_date, 'checkout_date' => $checkout_date, 'inn' => $inn ]);
     }
 
     /**
@@ -110,8 +127,19 @@ class BookController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy( $id )
     {
-        //
+        Book::find( $id )->delete();
+        
+        $user = Auth::user();
+        $books = $user->books()->get();
+        
+        $inn_names = [];
+        foreach( $books as $book ){
+            $inn = Inn::find( $book->inn_id );
+            $inn_names[] = $inn->name;
+        }
+
+        return view( 'user.index', [ 'user' => $user, 'books' => $books, 'inn_names' => $inn_names ] );
     }
 }

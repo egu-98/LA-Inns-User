@@ -26,7 +26,7 @@
     @endif
 
     @if( Auth::check() )
-        <form action="{{ route( 'books.index' ) }}" method="GET">
+        <form action="{{ route( 'pre_create_book' ) }}" method="GET">
             @csrf    
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
             <input type="hidden" name="inn_id" value="{{ $inn->id }}">

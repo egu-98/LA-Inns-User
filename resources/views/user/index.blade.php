@@ -20,14 +20,16 @@
 
 <div>
 <h2>予約履歴</h2>
-@if( isset( $books ) )
+@if( count( $books ) > 0)
 <ul>
-    @foreach ( $books as $book )
+    @for( $i = 0; $i < count( $books ); $i++ )
     <li>
-        予約
+        <a href="{{ route( 'books.show', $books[ $i ]->id ) }}">{{ $inn_names[ $i ] }}</a>
     </li>
-    @endforeach
+    @endfor
 </ul>
+@else
+<p>予約はありません</p>
 @endif
 </div>
 @endsection

@@ -12,7 +12,7 @@
 <h1>{{ $inn->name }}</h1>
 
 <div>
-    <img src="{{ asset( 'img/inn_pic.jpeg' ) }}" alt="{{ $inn->name }}_pics" style="width: 45ex; height: 30ex;">
+    <img src="data:image/png;base64,{{ $inn->pic_path }}" alt="{{ $inn->name }}_pics" style="width: 45ex; height: 30ex;">
 </div>
 
 <div>

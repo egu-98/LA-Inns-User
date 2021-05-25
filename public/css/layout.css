@@ -56,4 +56,14 @@
 .star-rating i ~ i ~ i ~ i ~ i {
   width: 100%;
 }
+
+div.review {
+  height: 200px;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+div.review::-webkit-scrollbar {
+  display: none;
+}
   

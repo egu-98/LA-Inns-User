@@ -1,7 +1,5 @@
 @if( $errors->count() )
-    <ul>
         @foreach( $errors->all() as $error )
-            <li>{{ $error }}</li>
+            <p class="uk-text-danger">{{ $error }}</p>
         @endforeach
-    </ul>
 @endif

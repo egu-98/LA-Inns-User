@@ -42,7 +42,7 @@
 
             <hr>
 
-            <div>
+            <div class="uk-text-bolder uk-text-large uk-margin-bottom">
                 料金：<span id="total_price"></span>
             </div>
         </form>

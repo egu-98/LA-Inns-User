@@ -97,7 +97,7 @@ class BookController extends Controller
         $inn = Inn::find( $book->inn_id );
         $plans = $inn->plans()->get();
         $reviews = $inn->reviews()->get();
-        return view( 'inn.show', [ 'inn' => $inn, 'plans' => $plans, 'reviews' => $reviews ] );
+        return view( 'book.done_booking' );
     }
 
     /**

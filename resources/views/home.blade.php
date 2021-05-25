@@ -6,7 +6,7 @@
 
 @section( 'contents' )
 <div class="uk-text-center uk-margin-bottom">
-    <form class="uk-search uk-search-large" action="{{ route( 'inn_search' ) }}" method="GET" style="border: 1px solid; boder-color: gray; border-radius: 20px;">
+    <form class="uk-search uk-search-large" action="{{ route( 'inn_search' ) }}" method="GET" style="border: 1px solid; boder-color: gray; border-radius: 40px;">
         @csrf
         <input class="uk-search-input" type="search" name="address" placeholder="ロケーション" value="{{ request( 'location' ) }}">
         <button class="uk-search-icon-flip" type="submit" uk-search-icon></button>

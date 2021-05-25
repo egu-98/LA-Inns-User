@@ -27,13 +27,36 @@ class BookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function preCreateBook( Request $request )
-    {     
+    {    
+       
         $plans = Plan::where( 'inn_id', $request->inn_id )->get();
-        return view( 'book.pre_create', [ 'user_id' => $request->user_id, 'inn_id' => $request->inn_id, 'plans' => $plans ] );
+        $inn = Inn::find( $request->inn_id );
+        return view( 'book.pre_create', [ 'user_id' => $request->user_id, 'inn_id' => $request->inn_id, 'plans' => $plans, 'inn_name' => $inn->name ] );
     }
 
     public function create( Request $request )
     {   
+        // room availability validation
+        $inn = Inn::find( $request->inn_id );
+        $checkin_date = explode( '-', $request->checkin_date );
+        $books = Book::where( 'checkin_date', $request->checkin_date )->where( 'inn_id', $inn->id )->get();
+        $vacant_rooms = $inn->rooms;
+        foreach( $books as $book ){
+            $vacant_rooms -= $book->rooms;
+        }
+        
+        $room_error = array();
+        if( $vacant_rooms == 0 ) $room_error[] = $checkin_date[ 0 ] . "年 " . (int)$checkin_date[ 1 ] . "月 " . (int)$checkin_date[ 2 ] . "日は予約が埋まっています。";
+        elseif( $vacant_rooms < $request->rooms && $inn->rooms > $request->rooms ) $room_error[] = '部屋の空きが' . $vacant_rooms . '部屋しかありません。';
+        if( $inn->rooms < $request->rooms ) $room_error[] = '部屋数は' . $inn->rooms . '部屋までです。';
+        
+        $erorr_count = count( $room_error );
+        if( $erorr_count > 0 ){
+            $plans = Plan::where( 'inn_id', $request->inn_id )->get();
+            return view( 'book.pre_create', [ 'user_id' => $request->user_id, 'inn_id' => $request->inn_id, 'plans' => $plans, 'inn_name' => $inn->name, 'room_error' => $room_error ] );
+        } 
+        //-----------------------------
+
         $book = new Book;
         $book->user_id = $request->user_id;
         $book->inn_id = $request->inn_id;

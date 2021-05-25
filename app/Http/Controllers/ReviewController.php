@@ -81,7 +81,15 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+        $review = Review::find( $review->id );
+        $review->text = $request->review;
+        $review->stars = $request->rating;
+        $review->save();
+
+        $inn = Inn::find( $request->inn_id );
+        $plans = $inn->plans()->get();
+        $reviews = $inn->reviews()->get();
+        return view( 'inn.show', [ 'inn' => $inn, 'plans' => $plans, 'reviews' => $reviews ] );
     }
 
     /**

@@ -13,7 +13,6 @@
 
 @section( 'contents' )
 <h1>予約情報確認</h1>
-
 <div>
     <form action="{{ route( 'books.store' ) }}" method="POST">
         @csrf

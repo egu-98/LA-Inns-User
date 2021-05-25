@@ -62,6 +62,28 @@
     
     <div>
         @if( Auth::check() )
+            @if( Auth::user()->review()->exists() )
+            <p>
+                <form action="{{ route( 'reviews.update', Auth::user()->review()->first() ) }}" method="POST">
+                @csrf
+                @method( 'put' )
+                <img src="{{ asset( 'img/icon.jpg' ) }}" alt="{{ Auth::user()->name }}" style="width: 3ex; heghit: 3ex;">
+                <label for="review">{{ Auth::user()->name }}</label>
+                <span class="star-rating">
+                    @for( $i = 1; $i <= 5; $i++ )
+                        @if( $i == Auth::user()->review()->first()[ 'stars' ] )
+                            <input type="radio" name="rating" value="$i" checked="checked"><i></i>  
+                        @endif
+                        <input type="radio" name="rating" value="{{ $i }}"><i></i>
+                    @endfor>
+                </span>
+            </p>
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="inn_id" value="{{ $inn->id }}">
+            <textarea name="review" rows="4" cols="70">{{ Auth::user()->review()->first()['text'] }}</textarea>
+            <button type="submit" id="post_review">レビューを投稿する</button>
+                
+            @else
             <form action="{{ route( 'reviews.store' ) }}" method="POST">
                 @csrf
                 <p>
@@ -80,6 +102,7 @@
                 <textarea name="review" rows="4" cols="70"></textarea>
                 <button type="submit" id="post_review">レビューを投稿する</button>
             </form>
+            @endif  
         @endif
     </div>
 </div>

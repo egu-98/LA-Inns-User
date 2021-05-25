@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use App\User;
+use App\Inn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -16,9 +19,16 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // userのidを外部キーにbooksテーブルから予約情報を取得する
-        $books = [];
-        return view( 'user.index', [ 'user' => $user, 'books' => $books ] );
+        $books = $user->books()->get();
+        
+        $inn_names = [];
+        foreach( $books as $book ){
+            $inn = Inn::find( $book->inn_id );
+            $inn_names[] = $inn->name;
+        }
+        // var_dump( $inn_names );
+
+        return view( 'user.index', [ 'user' => $user, 'books' => $books, 'inn_names' => $inn_names ] );
     }
 
     /**

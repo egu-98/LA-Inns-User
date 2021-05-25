@@ -12,7 +12,14 @@
 
 @section( 'contents' )
 <h1>予約情報入力</h1>
-
+<h2>{{ $inn_name }}</h2>
+@if( isset( $room_error ) )
+    <ul>
+    @foreach ( $room_error as $re )
+        <li>{{ $re }}</li>
+    @endforeach
+    </ul>
+@endif
 <div>
     <form action="{{ route( 'books.create' ) }}" method="GET" name="book_form">
         @csrf
@@ -20,17 +27,18 @@
         <input type="hidden" name="inn_id" value="{{ $inn_id }}">
         <p>
             <label for="name">チェックイン：</label>
-            <input type="date" name="checkin_date" id="checkin_date" onchange="total_price()">
+            <input type="date" name="checkin_date" id="checkin_date" onchange="total_price()" value="{{ request( 'checkin_date' ) }}">
         </p>
         <p>
             <label for="name">チェックアウト：</label>
-            <input type="date" name="checkout_date" id="checkout_date" onchange="total_price()">
+            <input type="date" name="checkout_date" id="checkout_date" onchange="total_price()" value="{{ request( 'checkout_date' ) }}">
         </p>
         <p>
             <label for="plan">プラン：</label>
             <select name="plan" id="plan" onchange="total_price()">
                 @foreach( $plans as $plan )
-                    <option value="{{ $plan->id }}_{{ $plan->price }}" id="plan_{{ $plan->id }}" >{{ $plan->name }}: {{ $plan->price }}円/泊</option>
+                    <option value="{{ $plan->id }}_{{ $plan->price }}" id="plan_{{ $plan->id }}" value="{{ request( 'plan' ) }}"
+                        {{ request( 'plan' ) == $plan->id ? 'selected' : '' }}>{{ $plan->name }}: {{ $plan->price }}円/泊</option>
                 @endforeach
             </select>
         </p>

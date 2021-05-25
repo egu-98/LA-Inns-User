@@ -1,6 +1,13 @@
 @extends( 'common.layout' )
 
 @section( 'header' )
+<div>
+    <form action="{{ route( 'inn_search' ) }}" method="GET">
+        @csrf
+        <input  type="search" name="address" placeholder="ロケーション" value="{{ old( 'location' ) }}">
+        <button type="submit">検索</button>
+    </form>    
+</div>
 @endsection
 
 @section( 'contents' )

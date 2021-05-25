@@ -26,7 +26,6 @@ class UserController extends Controller
             $inn = Inn::find( $book->inn_id );
             $inn_names[] = $inn->name;
         }
-        // var_dump( $inn_names );
 
         return view( 'user.index', [ 'user' => $user, 'books' => $books, 'inn_names' => $inn_names ] );
     }

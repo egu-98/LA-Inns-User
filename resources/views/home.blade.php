@@ -8,7 +8,7 @@
 <div class="uk-text-center uk-margin-bottom">
     <form class="uk-search uk-search-large" action="{{ route( 'inn_search' ) }}" method="GET" style="border: 1px solid; boder-color: gray; border-radius: 40px;">
         @csrf
-        <input class="uk-search-input" type="search" name="address" placeholder="ロケーション" value="{{ request( 'location' ) }}">
+        <input class="uk-text-center uk-search-input" type="search" name="address" placeholder="ロケーション" value="{{ request( 'location' ) }}">
         <button class="uk-search-icon-flip" type="submit" uk-search-icon></button>
     </form>    
 </div>
@@ -20,7 +20,7 @@
         <div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
             <div class="uk-flex">
                 <div class="uk-container uk-margin-remove">
-                    <img src="data:image/png;base64,{{ $inn->pic_path }}" alt="{{ $inn->name }}_pic" style="width: 40ex; height: 25ex">
+                    <img src="data:image/png;base64,{{ $inn->pic_path }}" alt="{{ $inn->name }}_pic" style="width: 40ex; height: 25ex; border-radius: 20px;">
                 </div>
                 <div class="uk-container uk-margin-remove">
                     <h2>{{ $inn->name }}</h2>

@@ -20,7 +20,7 @@
         <div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
             <div class="uk-flex">
                 <div class="uk-container uk-margin-remove">
-                    <img src="{{ asset( 'img/inn_pic.jpeg' ) }}" alt="{{ $inn->name }}_pic" style="width: 40ex; height: 25ex">
+                    <img src="{{ asset( 'img/inn_pic.jpeg' ) }}" alt="{{ $inn->name }}_pic" class="uk-width-medium">
                 </div>
                 <div class="uk-container uk-margin-remove">
                     <h2>{{ $inn->name }}</h2>

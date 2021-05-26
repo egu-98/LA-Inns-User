@@ -21,7 +21,7 @@
     <div>
         @if( isset( $room_error ) )
             @foreach ( $room_error as $re )
-                <p class="uk-text-danger">・{{ $re }}</p>
+                <p class="uk-text-danger">{{ $re }}</p>
             @endforeach
         @endif
     </div>

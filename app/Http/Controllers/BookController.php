@@ -41,7 +41,7 @@ class BookController extends Controller
             'checkin_date' => 'required',
             'checkout_date' => 'required',
             'plan' => 'required',
-            'rooms' => 'required',
+            'rooms' => 'integer|required|min:1',
         ] );
 
         // room availability validation
@@ -57,7 +57,7 @@ class BookController extends Controller
         if( $vacant_rooms == 0 ) $room_error[] = $checkin_date[ 0 ] . "年 " . (int)$checkin_date[ 1 ] . "月 " . (int)$checkin_date[ 2 ] . "日は予約が埋まっています。";
         elseif( $vacant_rooms < $request->rooms && $inn->rooms > $request->rooms ) $room_error[] = '部屋の空きが' . $vacant_rooms . '部屋しかありません。';
         if( $inn->rooms < $request->rooms ) $room_error[] = '部屋数は' . $inn->rooms . '部屋までです。';
-        
+
         $erorr_count = count( $room_error );
         if( $erorr_count > 0 ){
             $plans = Plan::where( 'inn_id', $request->inn_id )->get();

@@ -37,8 +37,11 @@
                 @csrf    
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="inn_id" value="{{ $inn->id }}">
-                <button class="uk-button uk-button-default" type="submmit">予約する</button>        
+                <button class="uk-button uk-button-default" type="type" id="reserve">予約する</button>        
             </form>
+            <script>
+                
+            </script>
         @else <p>予約をするにはログインしてください</p>
         @endif
     </div>

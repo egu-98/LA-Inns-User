@@ -19,20 +19,20 @@
     <form action="{{ route( 'register' ) }}" method="POST">
         @csrf
         <p>
-            <label for="name">名前</label>
+            <label for="name">名前：</label>
             <input type="text" name="name" value="{{ old( 'name' ) }}">
         </p>
         <p>
-            <label for="email">メールアドレス</label>
+            <label for="email">メールアドレス：</label>
             <input type="email" name="email" value="{{ old( 'email' ) }}">
         </p>
         <p>
-            <label for="password">パスワード</label>
+            <label for="password">パスワード：</label>
             <input type="password" name="password" value="">
         </p>
         <p>
-            <label for="password_confirmation">パスワード</label>
-            <input type="password" name="password_confirmation" value=""">
+            <label for="password_confirmation">パスワード：</label>
+            <input type="password" name="password_confirmation" value="">
         </p>
         <p>
             <button class="uk-button uk-button-default" type="submit">新規登録</button>

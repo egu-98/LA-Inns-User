@@ -31,7 +31,7 @@
             <input type="password" name="password" value="">
         </p>
         <p>
-            <label for="password_confirmation">パスワード：</label>
+            <label for="password_confirmation">パスワード確認用：</label>
             <input type="password" name="password_confirmation" value="">
         </p>
         <p>

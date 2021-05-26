@@ -17,6 +17,7 @@
     <h1>予約情報入力</h1>
     <h2>{{ $inn_name }}</h2>
     
+    @include( 'common.flash' )
     <div>
         @if( isset( $room_error ) )
             @foreach ( $room_error as $re )

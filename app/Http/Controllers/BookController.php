@@ -28,7 +28,7 @@ class BookController extends Controller
      */
     public function preCreateBook( Request $request )
     {    
-       
+        
         $plans = Plan::where( 'inn_id', $request->inn_id )->get();
         $inn = Inn::find( $request->inn_id );
         return view( 'book.pre_create', [ 'user_id' => $request->user_id, 'inn_id' => $request->inn_id, 'plans' => $plans, 'inn_name' => $inn->name ] );
@@ -36,6 +36,14 @@ class BookController extends Controller
 
     public function create( Request $request )
     {   
+        // validation
+        $this->validate( $request, [
+            'checkin_date' => 'required',
+            'checkout_date' => 'required',
+            'plan' => 'required',
+            'rooms' => 'required',
+        ] );
+
         // room availability validation
         $inn = Inn::find( $request->inn_id );
         $checkin_date = explode( '-', $request->checkin_date );

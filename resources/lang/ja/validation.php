@@ -149,7 +149,10 @@ return [
         'title' => 'タイトル',
         'name' => '名前',
         'email' => 'メールアドレス',
-        'password' => 'パスワード'
+        'password' => 'パスワード',
+        'checkin_date' => 'チェックイン',
+        'checkout_date' => 'チェックアウト',
+        'rooms' => '部屋数',
     ],
 
 ];

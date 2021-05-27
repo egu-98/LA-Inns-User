@@ -63,7 +63,6 @@ class BookController extends Controller
             $plans = Plan::where( 'inn_id', $request->inn_id )->get();
             return view( 'book.pre_create', [ 'user_id' => $request->user_id, 'inn_id' => $request->inn_id, 'plans' => $plans, 'inn_name' => $inn->name, 'room_error' => $room_error ] );
         } 
-        //-----------------------------
 
         $book = new Book;
         $book->user_id = $request->user_id;

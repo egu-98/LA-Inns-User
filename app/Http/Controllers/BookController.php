@@ -84,11 +84,11 @@ class BookController extends Controller
         // error messerge
         $room_error = array();
         if( count( $impossible_days ) > 0 ){
-            $room_error[] = $impossible_days[ 0 ];
+            $room_error[] =  $impossible_days[ 0 ];
             for( $i = 1; $i < count( $impossible_days ); $i++ ){
                 $room_error[ 0 ] .= ", " . $impossible_days[ $i ];
             }
-            $room_error[ 0 ] .= "は予約が埋まっています。";  
+            $room_error[ 0 ] .= "の予約は既に埋まっています。";  
         } 
         if( $inn->rooms < $request->rooms ) $room_error[] = '部屋数は' . $inn->rooms . '部屋までです。';
         

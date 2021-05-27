@@ -67,3 +67,12 @@ div.review::-webkit-scrollbar {
   display: none;
 }
   
+div #map-parent{
+  height: 500px;
+}
+#map {
+  margin: 0 auto;
+  height: 80%;
+  width: 80%;
+}
+      

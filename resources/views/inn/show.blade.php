@@ -123,9 +123,18 @@
     </div>
 </div>
 
-<div class="uk-margin-top uk-text-center">
+<div id="map-parent" class="uk-margin-top uk-text-center">
     <h2 class="uk-heading-line uk-text-center uk-margin-large-top"><span>エリア情報</span></h2>
-    <iframe class="uk-margin-xlarge-bottom" src="https://www.google.com/maps?output=embed&z=15&q={{ $inn->address }}" width="800" height="400" frameborder="0" style="border: 0;" aria-hidden="false" tabindex="0"></iframe>
+
+    <div id="floating-panel">
+        <input id="address" type="hidden" value="{{ $inn->address }}" />
+    </div>
+    <div id="map"></div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn9i52LZLE7OxAxyfpGQCM-LZAI5kyL60&callback=initMap&libraries=&v=weekly" async></script>
+    <script src="{{ asset('/js/map.js') }}"></script>
+
 </div>
 
 @endsection

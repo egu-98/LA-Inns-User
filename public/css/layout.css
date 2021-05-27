@@ -57,13 +57,13 @@
   width: 100%;
 }
 
-div.review {
-  height: 200px;
+div.scroll-container {
+  height: 250px;
   overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-div.review::-webkit-scrollbar {
+div.scroll-container::-webkit-scrollbar {
   display: none;
 }
   

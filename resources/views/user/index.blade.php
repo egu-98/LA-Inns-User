@@ -17,7 +17,7 @@
             <div class="uk-margin-xlarge-left uk-text-center uk-width-3-5 uk-padding" style="border: 1px solid; border-radius: 50px;">
                 <img src="{{ asset( 'img/icon.jpg' ) }}" alt="user_icon" style="width: 20ex; heghit: 20ex">
                 <h3>名前： {{ $user->name }}</h3>
-                <p>メールアドレス： {{ $user->email }}</p>
+                <p class="uk-text-small">メールアドレス： {{ $user->email }}</p>
                 <a href="{{ route( 'users.edit', $user->id ) }}">アカウント情報を変更する</a>
             </div>
         </div>
@@ -29,7 +29,7 @@
         <ul class="uk-list uk-list-circle">
             @for( $i = 0; $i < count( $books ); $i++ )
             <li>
-                <a href="{{ route( 'books.show', $books[ $i ]->id ) }}">{{ $inn_names[ $i ] }}</a>
+                <a href="{{ route( 'books.show', $books[ $i ]->id ) }}">{{ $inn_names[ $i ] }} ({{ $books[ $i ]->checkin_date }})</a>
             </li>
             @endfor
         </ul>

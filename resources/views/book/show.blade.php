@@ -46,11 +46,13 @@
                 料金：<span id="total_price"></span>
             </div>
         </form>
-        <a href="" onclick="deleteBook({{ $book->id }})" >キャンセルする</a>
-        <form action="{{ route( 'books.destroy', $book->id ) }}" method="POST" id="delete-form">
-            @csrf
-            @method( 'delete' )
-        </form>
+        @if( $book->checkin_date >= date('Y-m-d') )    
+            <a href="" onclick="deleteBook({{ $book->id }})" >キャンセルする</a>
+            <form action="{{ route( 'books.destroy', $book->id ) }}" method="POST" id="delete-form">
+                @csrf
+                @method( 'delete' )
+            </form>
+        @endif
         <script>
             var total_price;
             var days;

@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $books = $user->books()->get();
+        $books = $user->books()->orderBy('checkin_date', 'desc')->get();
         
         $inn_names = [];
         foreach( $books as $book ){

@@ -17,10 +17,11 @@
     <h1>予約情報入力</h1>
     <h2>{{ $inn_name }}</h2>
     
+    @include( 'common.flash' )
     <div>
         @if( isset( $room_error ) )
             @foreach ( $room_error as $re )
-                <p class="uk-text-danger">・{{ $re }}</p>
+                <p class="uk-text-danger">{{ $re }}</p>
             @endforeach
         @endif
     </div>
@@ -32,7 +33,7 @@
             <input type="hidden" name="inn_id" value="{{ $inn_id }}">
             <p>
                 <label for="name">チェックイン：</label>
-                <input type="date" name="checkin_date" id="checkin_date" onchange="total_price()" value="{{ request( 'checkin_date' ) }}">
+                <input type="date" name="checkin_date" id="checkin_date" onchange="total_price()" value="{{ request( 'checkin_date' ) }}" min="{{ date('Y-m-d') }}">
             </p>
             <p>
                 <label for="name">チェックアウト：</label>

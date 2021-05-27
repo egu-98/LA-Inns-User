@@ -17,7 +17,7 @@
 <div class="uk-margin-xlarge-left uk-margin-xlarge-right">
 @if( isset( $inns ) )
     @foreach( $inns as $inn )
-        <div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
+        <div class="uk-card uk-card-default uk-card-body uk-animation-slide-bottom uk-margin-bottom">
             <div class="uk-flex">
                 <div class="uk-container uk-margin-remove">
                     <img src="data:image/png;base64,{{ $inn->pic_path }}" alt="{{ $inn->name }}_pic" style="width: 40ex; height: 25ex; border-radius: 20px;">

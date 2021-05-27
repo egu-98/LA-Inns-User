@@ -37,9 +37,9 @@
                 @csrf    
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="inn_id" value="{{ $inn->id }}">
-                <button class="uk-button uk-button-default" type="submmit">予約する</button>        
+                <button class="uk-button uk-button-default" type="submit" id="reserve">予約する</button>        
             </form>
-        @else <p>予約をするにはログインしてください</p>
+        @else <a class="uk-button uk-button-default" href="{{ route( 'login' ) }}">予約をするにはログインしてください</a>
         @endif
     </div>
 </div>
@@ -75,7 +75,7 @@
         @if( Auth::check() )
             @if( Auth::user()->review()->where( 'inn_id', $inn->id )->exists() )
             <div class="uk-width-2-3" style="border: 1px solid; border-radius: 30px">
-                <form class="uk-margin-left" action="{{ route( 'reviews.update', Auth::user()->review()->where( 'inn_id', $inn->id )->first() ) }}" method="POST">
+                <form class="uk-margin-left" id="review-form" action="{{ route( 'reviews.update', Auth::user()->review()->where( 'inn_id', $inn->id )->first() ) }}" method="POST">
                     @csrf
                     @method( 'put' )
                     <p>
@@ -93,13 +93,14 @@
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="inn_id" value="{{ $inn->id }}">
                     <textarea name="review" rows="4" cols="70">{{ Auth::user()->review()->where( 'inn_id', $inn->id )->first()[ 'text' ] }}</textarea>
-                    <button class="uk-button uk-button-default uk-margin-small-bottom" type="submit" id="post_review">レビューを投稿する</button>
+                    {{-- <button class="uk-button uk-button-default uk-margin-small-bottom" type="submit" id="post_review">レビューを投稿する</button> --}}
+                    <button class="uk-button uk-button-default uk-margin-small-bottom" id="post_review" type="button">レビューを投稿する</button>
                 </form>      
             </div>
           
             @else
             <div class="uk-width-2-3" style="border: 1px solid; border-radius: 30px">
-                <form class="uk-margin-left" action="{{ route( 'reviews.store' ) }}" method="POST">
+                <form class="uk-margin-left" id="review-form" action="{{ route( 'reviews.store' ) }}" method="POST">
                     @csrf
                     <p>
                         <img src="{{ asset( 'img/icon.jpg' ) }}" alt="{{ Auth::user()->name }}" style="width: 5ex; heghit: 5ex;">
@@ -115,12 +116,24 @@
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="inn_id" value="{{ $inn->id }}">
                     <textarea name="review" rows="4" cols="70"></textarea>
-                    <button class="uk-button uk-button-default uk-margin-small-bottom" type="submit" id="post_review">レビューを投稿する</button>
+                    {{-- <button class="uk-button uk-button-default uk-margin-small-bottom" type="submit" id="post_review">レビューを投稿する</button> --}}
+                    <button class="uk-button uk-button-default uk-margin-small-bottom" id="post_review" type="button">レビューを投稿する</button>
                 </form>
             </div>
             @endif  
         @endif
     </div>
+    <script>
+        var button = document.getElementById( 'post_review' );
+        button.addEventListener( 'click', function(){
+            var element = document.getElementById( 'review-form' );
+            var radioNodeList = element.rating;
+            var stars = radioNodeList.value;
+
+            if ( stars != "" ) element.submit();
+            else window.alert( '星評価を入力してください。' );
+        })
+    </script>
 </div>
 
 <div id="map-parent" class="uk-margin-top uk-text-center">

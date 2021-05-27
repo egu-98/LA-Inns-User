@@ -51,7 +51,6 @@ class BookController extends Controller
         $bookings = Book::where( 'inn_id', $request->inn_id )->where( 'checkout_date', '>', $request->checkin_date )->
                         where( 'checkin_date', '<', $request->checkout_date )->orderBy('checkin_date', 'asc')->get(); 
         
-        
         $begin = new DateTime( $request->checkin_date );
         $end = new DateTime( $request->checkout_date );
         $diff = $end->diff( $begin );
@@ -61,8 +60,6 @@ class BookController extends Controller
             $begin->modify( '+1 day' );
         }
         
-        $possible = true;
-        $room_error = array();
         $impossible_days = array();
         foreach( $bookings as $booking ){
             $begin = new DateTime( $request->checkin_date );
@@ -77,15 +74,15 @@ class BookController extends Controller
                 $reserved_rooms[ $begin->format( 'Y-m-d' ) ] += $rooms;
                 if( $reserved_rooms[ $begin->format( 'Y-m-d' ) ] >= $inn->rooms ){
                     $impossible_days[] = $begin->format( 'Y年m月d日' ) ;
-                    $possible = false;
                     $begin->modify( '+1 day' );
                 }
                 $begin->modify( '+1 day' );
             }
-        } 
+        }
         
         
         // error messerge
+        $room_error = array();
         if( count( $impossible_days ) > 0 ){
             $room_error[] = $impossible_days[ 0 ];
             for( $i = 1; $i < count( $impossible_days ); $i++ ){

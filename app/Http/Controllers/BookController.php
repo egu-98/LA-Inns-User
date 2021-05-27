@@ -109,11 +109,8 @@ class BookController extends Controller
         $book->checkin_date = $request->checkin_date;
         $book->checkout_date = $request->checkout_date;
 
-        $checkin_date = explode( '-', $book->checkin_date );
-        $checkin_date = $checkin_date[ 0 ] . "年 " . (int)$checkin_date[ 1 ] . "月 " . (int)$checkin_date[ 2 ] . "日";
-
-        $checkout_date = explode( '-', $book->checkout_date );
-        $checkout_date = $checkout_date[ 0 ] . "年 " . (int)$checkout_date[ 1 ] . "月 " . (int)$checkout_date[ 2 ] . "日";
+        $checkin_date = $begin->format( 'Y年m月d日' );
+        $checkout_date = $end->format( 'Y年m月d日' );
         
         $plan = Plan::find( $plan_id[ 0 ] );
         return view( 'book.create', [ 'book' => $book, 'plan' => $plan, 'checkin_date' => $checkin_date, 'checkout_date' => $checkout_date ]);

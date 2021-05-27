@@ -46,7 +46,7 @@
 
 <div class="uk-margin-large-top uk-margin-left">
     <h2 class="uk-heading-line"><span>みんなのレビュー</span></h2>
-    <div class="review">
+    <div class="scroll-container">
         @if( count( $reviews ) > 0 )
         @foreach( $reviews as $review )
             <div class=" uk-margin-bottom">
@@ -74,7 +74,7 @@
     <div>
         @if( Auth::check() )
             @if( Auth::user()->review()->where( 'inn_id', $inn->id )->exists() )
-            <div class="uk-width-2-3" style="border: 1px solid; border-radius: 30px">
+            <div class="uk-width-3-5" style="border: 1px solid; border-radius: 30px">
                 <form class="uk-margin-left" id="review-form" action="{{ route( 'reviews.update', Auth::user()->review()->where( 'inn_id', $inn->id )->first() ) }}" method="POST">
                     @csrf
                     @method( 'put' )
@@ -99,7 +99,7 @@
             </div>
           
             @else
-            <div class="uk-width-2-3" style="border: 1px solid; border-radius: 30px">
+            <div class="uk-width-3-5" style="border: 1px solid; border-radius: 30px">
                 <form class="uk-margin-left" id="review-form" action="{{ route( 'reviews.store' ) }}" method="POST">
                     @csrf
                     <p>

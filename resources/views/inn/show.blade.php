@@ -37,12 +37,9 @@
                 @csrf    
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="inn_id" value="{{ $inn->id }}">
-                <button class="uk-button uk-button-default" type="type" id="reserve">予約する</button>        
+                <button class="uk-button uk-button-default" type="submit" id="reserve">予約する</button>        
             </form>
-            <script>
-                
-            </script>
-        @else <p>予約をするにはログインしてください</p>
+        @else <a class="uk-button uk-button-default" href="{{ route( 'login' ) }}">予約をするにはログインしてください</a>
         @endif
     </div>
 </div>
@@ -141,8 +138,8 @@
 
 <div class="uk-margin-top uk-text-center">
     <h2 class="uk-heading-line uk-text-center uk-margin-large-top"><span>エリア情報</span></h2>
-    {{-- <iframe class="uk-margin-xlarge-bottom" src="https://www.google.com/maps?output=embed&z=15&q={{ $inn->address }}" width="800" height="400" frameborder="0" style="border: 0;" aria-hidden="false" tabindex="0"></iframe> --}}
-    <iframe class="uk-margin-xlarge-bottom" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.741711398294!2d139.76440031460515!3d35.68336133746377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bf9235c14e5%3A0xa6ac4691a8e0bb1e!2z5Li444OO5YaF44Ob44OG44Or!5e0!3m2!1sja!2sjp!4v1621987790741!5m2!1sja!2sjp" width="800" height="400" frameborder="0" style="border: 0;" aria-hidden="false" tabindex="0"></iframe>
+    <iframe class="uk-margin-xlarge-bottom" src="https://www.google.com/maps?output=embed&z=15&q={{ $inn->address }}" width="800" height="400" frameborder="0" style="border: 0;" aria-hidden="false" tabindex="0"></iframe>
+    {{-- <iframe class="uk-margin-xlarge-bottom" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.741711398294!2d139.76440031460515!3d35.68336133746377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bf9235c14e5%3A0xa6ac4691a8e0bb1e!2z5Li444OO5YaF44Ob44OG44Or!5e0!3m2!1sja!2sjp!4v1621987790741!5m2!1sja!2sjp" width="800" height="400" frameborder="0" style="border: 0;" aria-hidden="false" tabindex="0"></iframe> --}}
 </iframe>
 </div>
 

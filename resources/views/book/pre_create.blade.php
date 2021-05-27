@@ -33,7 +33,7 @@
             <input type="hidden" name="inn_id" value="{{ $inn_id }}">
             <p>
                 <label for="name">チェックイン：</label>
-                <input type="date" name="checkin_date" id="checkin_date" onchange="total_price()" value="{{ request( 'checkin_date' ) }}">
+                <input type="date" name="checkin_date" id="checkin_date" onchange="total_price()" value="{{ request( 'checkin_date' ) }}" min="{{ date('Y-m-d') }}">
             </p>
             <p>
                 <label for="name">チェックアウト：</label>

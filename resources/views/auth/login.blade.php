@@ -14,7 +14,7 @@
 <a  class="uk-margin-small-left" uk-icon="icon: arrow-left; ratio: 2" href="{{ route( 'user_home' ) }}"></a>
 
 <div class="uk-text-center">
-    <h2 class="uk-margin-medium-bottom">宿.comへようこそ</h2>
+    <h2 class="uk-margin-medium-bottom">LA-Innsへようこそ</h2>
     @include( 'common.flash' )
     <form action="{{ route( 'login' ) }}" method="POST">
         @csrf

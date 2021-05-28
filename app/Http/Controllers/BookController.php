@@ -48,8 +48,8 @@ class BookController extends Controller
 
         // room availability validation
         $inn = Inn::find( $request->inn_id );
-        $bookings = Book::where( 'inn_id', $request->inn_id )->where( 'checkout_date', '>', $request->checkin_date )->
-                        where( 'checkin_date', '<', $request->checkout_date )->orderBy('checkin_date', 'asc')->get(); 
+        $bookings = Book::where( 'inn_id', $request->inn_id )->where( 'checkout_date', '>=', $request->checkin_date )->
+                        where( 'checkin_date', '<=', $request->checkout_date )->orderBy('checkin_date', 'asc')->get(); 
         
         $begin = new DateTime( $request->checkin_date );
         $end = new DateTime( $request->checkout_date );

@@ -54,35 +54,36 @@ class BookController extends Controller
         $begin = new DateTime( $request->checkin_date );
         $end = new DateTime( $request->checkout_date );
         $diff = $end->diff( $begin );
-        $reserved_rooms = array();
+        $vacant_rooms = array();
         for( $i = 0; $i < $diff->days + 1; $i++ ){
-            $reserved_rooms[ $begin->format( 'Y-m-d' ) ] = $inn->rooms;
+            $vacant_rooms[ $begin->format( 'Y-m-d' ) ] = $inn->rooms;
             $begin->modify( '+1 day' );
         }
         
         // days when reservations are already full.
         $impossible_days = array(); 
         foreach( $bookings as $booking ){
+
             $begin = new DateTime( $request->checkin_date );
             $end = new DateTime( $request->checkout_date );
-
+            
             $begin_other = new DateTime( $booking->checkin_date );
             $end_other = new DateTime( $booking->checkout_date );
-            
+
+            $end_other->modify( '-1 day' );
             if( $begin < $begin_other ) $begin = $begin_other;
             if( $end > $end_other ) $end = $end_other;
 
             $rooms = $booking->rooms;
-            $end->modify( '-1 day' );
             while( $begin <= $end ){
-                $reserved_rooms[ $begin->format( 'Y-m-d' ) ] -= $rooms;
-                if( $reserved_rooms[ $begin->format( 'Y-m-d' ) ] <= 0 ){
+                $vacant_rooms[ $begin->format( 'Y-m-d' ) ] -= $rooms;
+                if( $vacant_rooms[ $begin->format( 'Y-m-d' ) ] <= 0 ){
                     $impossible_days[] = $begin->format( 'Y年m月d日' ) ;
                 }
                 $begin->modify( '+1 day' );
+                
             }
         }
-        
         
         // error messerge
         $room_error = array();
@@ -94,17 +95,16 @@ class BookController extends Controller
             $room_error[ 0 ] .= "の予約は既に埋まっています。";  
         }
 
-        // vacant rooms validation
-        $rdays = array();
-        while( $rr = current( $reserved_rooms ) ){
-            if( $rr < $request->rooms ) $rdays[] = new DateTime( key( $reserved_rooms ) );
-            next( $reserved_rooms );
+        foreach( $vacant_rooms as $key => $vr){
+            if( $vr < $request->rooms && $vr > 0 ){
+                $rdays[] = new DateTime( $key );
+            }
         }
 
         if( count( $rdays ) > 0 ){
             for( $i = 0; $i < count( $rdays ); $i++ ){
                 $date = $rdays[ $i ]->format( 'Y年m月d日' );
-                $room_error[] = $date . "の空き部屋は" . $reserved_rooms[ $rdays[ $i ]->format( 'Y-m-d' ) ] . "部屋です。";
+                $room_error[] = $date . "の空き部屋は" . $vacant_rooms[ $rdays[ $i ]->format( 'Y-m-d' ) ] . "部屋です。";
             }
         }
         

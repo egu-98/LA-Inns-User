@@ -60,7 +60,7 @@ class BookController extends Controller
             $begin->modify( '+1 day' );
         }
         
-        $impossible_days = array();
+        $impossible_days = array(); // A day when reservations are already full.
         foreach( $bookings as $booking ){
             $begin = new DateTime( $request->checkin_date );
             $end = new DateTime( $request->checkout_date );
@@ -89,8 +89,21 @@ class BookController extends Controller
                 $room_error[ 0 ] .= ", " . $impossible_days[ $i ];
             }
             $room_error[ 0 ] .= "の予約は既に埋まっています。";  
-        } 
-        if( $inn->rooms < $request->rooms ) $room_error[] = '部屋数は' . $inn->rooms . '部屋までです。';
+        }
+
+        // if( $inn->rooms < $request->rooms ) $room_error[] = '部屋数は' . $inn->rooms . '部屋までです。';
+        // $rdays = array();
+        // while( $rr = current( $reserved_rooms ) ){
+        //     if( $rr < $request->rooms ) $rdays[] = key( $reserved_rooms );
+        //     next( $reserved_rooms );
+        // }
+
+        // if( count( $rdays ) > 0 ){
+        //     $room_error[] = $rdays[ 0 ];
+        //     for( $i = 1; $i < count( $rdays ); $i++ ){
+        //         $room_error[ count( $room_error ) - 1 ] .= ", " . $$rdays . "の空き部屋は" . $reserved_rooms[ $rdays ] . "部屋です。";
+        //     }
+        // }
         
         $erorr_count = count( $room_error );
         if( $erorr_count > 0 ){

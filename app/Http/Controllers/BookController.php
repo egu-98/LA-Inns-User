@@ -64,8 +64,10 @@ class BookController extends Controller
         foreach( $bookings as $booking ){
             $begin = new DateTime( $request->checkin_date );
             $end = new DateTime( $request->checkout_date );
+
             $begin_other = new DateTime( $booking->checkin_date );
             $end_other = new DateTime( $booking->checkout_date );
+            
             if( $begin < $begin_other ) $begin = $begin_other;
             if( $end > $end_other ) $end = $end_other;
 
@@ -74,7 +76,6 @@ class BookController extends Controller
                 $reserved_rooms[ $begin->format( 'Y-m-d' ) ] += $rooms;
                 if( $reserved_rooms[ $begin->format( 'Y-m-d' ) ] >= $inn->rooms ){
                     $impossible_days[] = $begin->format( 'Y年m月d日' ) ;
-                    $begin->modify( '+1 day' );
                 }
                 $begin->modify( '+1 day' );
             }

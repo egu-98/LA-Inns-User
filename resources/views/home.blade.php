@@ -1,14 +1,14 @@
 @extends( 'common.layout' )
 
 @section( 'header' )
-<h1 class="uk-text-center uk-margin-top">宿を探す</h1>
+<h1 class="uk-text-center uk-margin-top" style="color: white">宿を探す</h1>
 @endsection
 
 @section( 'contents' )
 <div class="uk-text-center uk-margin-bottom">
-    <form class="uk-search uk-search-large" action="{{ route( 'inn_search' ) }}" method="GET" style="border: 1px solid; boder-color: gray; border-radius: 40px;">
+    <form class="uk-search uk-search-large uk-width-1-2" action="{{ route( 'inn_search' ) }}" method="GET" style="border: 1px solid; boder-color: gray; border-radius: 40px;">
         @csrf
-        <input class="uk-text-center uk-search-input" type="search" name="address" placeholder="ロケーション" value="{{ request( 'location' ) }}">
+        <input class="uk-text-center uk-search-input" type="search" name="address" placeholder="ロケーション" value="{{ request( 'location' ) }}" style="height: 55px;">
         <button class="uk-search-icon-flip" type="submit" uk-search-icon></button>
     </form>    
 </div>

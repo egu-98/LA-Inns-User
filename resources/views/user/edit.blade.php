@@ -13,25 +13,28 @@
 @section( 'contents' )
 <a  class="uk-margin-small-left" uk-icon="icon: arrow-left; ratio: 2" href="{{ route( 'users.index' ) }}"></a>
 <div class="uk-text-center">
-    <h1>アカウント情報変更</h1>
-
-    <div>
-        <img src="{{ asset( 'img/icon.jpg' ) }}" alt="user_icon" style="width: 20ex; heghit: 20ex">
-    </div>
-    <div>
-        <form action="{{ route( 'users.update', $user->id ) }}" method="POST" >
-            @csrf
-            @method( 'put' )
-            <p>
-                <label for="name">名前：</label>
-                <input type="text" name="name" placeholder="{{ $user->name }}" value="{{ $user->name }}">
-            </p>
-            <p>
-                <label for="email">メールアドレス：</label>
-                <input type="email" name="email" placeholder="{{ $user->email }}" value="{{ $user->email }}">
-            </p>
-            <button class="uk-button uk-button-default uk-margin-small-bottom" type="submit">変更する</button>
-        </form>
+    <div class="uk-margin-auto uk-width-2-5" style="background-color: white; border: 1px solid; border-radius: 50px;">
+        <h1 class="uk-margin-top">アカウント情報変更</h1>
+    
+        <div>
+            <img src="{{ asset( 'img/icon.jpg' ) }}" alt="user_icon" style="width: 20ex; heghit: 20ex">
+        </div>
+        <div>
+            <form action="{{ route( 'users.update', $user->id ) }}" method="POST" >
+                @csrf
+                @method( 'put' )
+                <p>
+                    <label for="name">名前：</label>
+                    <input type="text" name="name" placeholder="{{ $user->name }}" value="{{ $user->name }}">
+                </p>
+                <p>
+                    <label for="email">メールアドレス：</label>
+                    <input type="email" name="email" placeholder="{{ $user->email }}" value="{{ $user->email }}">
+                </p>
+                <button class="uk-button uk-button-default uk-margin-small-bottom" type="submit" style="border-radius: 50px;">変更する</button>
+            </form>
+        </div>
     </div>
 </div>
+
 @endsection

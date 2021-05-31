@@ -87,6 +87,7 @@ class BookController extends Controller
         
         // error messerge
         $room_error = array();
+        $rdays = array();
         if( count( $impossible_days ) > 0 ){
             $room_error[] =  $impossible_days[ 0 ];
             for( $i = 1; $i < count( $impossible_days ); $i++ ){

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" style="background-color: #faf8f2">
+<html lang="ja" style="background-color: #f5f5f5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
 </head>
 <body>
-    <div style="background-color: #4C3E55">
+    <div style="background-color: #5b4c64">
         <div class="uk-margin-remove-bottom uk-child-width-expand@s" uk-grid>
             <div>
                 {{-- <img src="{{ asset( 'img/LA_Inns.jpg' ) }}" alt="LA_Inns" style="width: 10ex; height: 13ex" onclick="location.href='/'"> --}}
